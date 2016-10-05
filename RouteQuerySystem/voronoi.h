@@ -31,6 +31,8 @@ public:
 	QVector<Route> getRoutes() const;
 
 private:
+	void buildGraph(const int index);
+
 	//建立第一个Voronoi图
 	//int index:路径序号
 	//QVector<Point> points:相应的数据点集
@@ -43,6 +45,10 @@ private:
 
 	//裁剪相同路径
 	void prune();
+
+	QMap<int, QVector<Point>> m_map;
+	CategorySequence m_cateSq;
+	Point m_start;
 
 	//Voronoi图集
 	QVector<QVector<Apollonius>> ags;

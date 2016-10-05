@@ -1,5 +1,6 @@
 #include "voronoi.h"
 #include <QMessageBox>
+#include <omp.h>
 
 Voronoi::Voronoi(const QMap<int, QVector<Point>> &map, const CategorySequence &cateSq,
 	const Point &start)
@@ -12,37 +13,14 @@ Voronoi::Voronoi(const QMap<int, QVector<Point>> &map, const CategorySequence &c
 	ags.resize(NUM_OF_POINT_ATTRIBUTE);
 	routes.resize(NUM_OF_POINT_ATTRIBUTE);
 
+	m_map = map;
+	m_cateSq = cateSq;
+	m_start = start;
+	
+#pragma omp parallel for
 	for (int i = 0; i < NUM_OF_POINT_ATTRIBUTE; ++i)
 	{
-		buildFirstGraph(i, map[cateSq[cateSq.size() - 1]]);
-
-		for (int j = cateSq.size() - 2; j >= 0; --j)
-		{
-			buildOtherGraph(i, map[cateSq[j]]);
-		}
-
-		Point lastPoint = start;
-		routes[i].points.push_back(start);
-		for (int j = 0; j < NUM_OF_POINT_ATTRIBUTE; ++j)
-		{
-			lastPoint.weight[j] = 0;
-		}
-		for (int j = 0; j < ags[i].size(); ++j)
-		{
-			Apollonius::Vertex_handle vertex =
-				ags[i][j].nearest_neighbor(Point_2(lastPoint.x, lastPoint.y));
-			double x = vertex->site().x();
-			double y = vertex->site().y();
-			for each(Point p in map[cateSq[j]])
-			{
-				if (abs(p.x - x) < 0.0001 && abs(p.y - y) < 0.0001)
-				{
-					lastPoint = p;
-					break;
-				}
-			}
-			routes[i].points.push_back(lastPoint);
-		}
+		buildGraph(i);
 	}
 
 	prune();
@@ -66,6 +44,39 @@ Route Voronoi::getRoute(const int index) const
 QVector<Route> Voronoi::getRoutes() const
 {
 	return routes;
+}
+
+void Voronoi::buildGraph(const int index)
+{
+	buildFirstGraph(index, m_map[m_cateSq[m_cateSq.size() - 1]]);
+
+	for (int j = m_cateSq.size() - 2; j >= 0; --j)
+	{
+		buildOtherGraph(index, m_map[m_cateSq[j]]);
+	}
+
+	Point lastPoint = m_start;
+	routes[index].points.push_back(m_start);
+	for (int j = 0; j < NUM_OF_POINT_ATTRIBUTE; ++j)
+	{
+		lastPoint.weight[j] = 0;
+	}
+	for (int j = 0; j < ags[index].size(); ++j)
+	{
+		Apollonius::Vertex_handle vertex =
+			ags[index][j].nearest_neighbor(Point_2(lastPoint.x, lastPoint.y));
+		double x = vertex->site().x();
+		double y = vertex->site().y();
+		for each(Point p in m_map[m_cateSq[j]])
+		{
+			if (abs(p.x - x) < 0.0001 && abs(p.y - y) < 0.0001)
+			{
+				lastPoint = p;
+				break;
+			}
+		}
+		routes[index].points.push_back(lastPoint);
+	}
 }
 
 void Voronoi::buildFirstGraph(const int index, const QVector<Point> &points)
