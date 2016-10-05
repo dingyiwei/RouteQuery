@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>HelpDialogClass</class>
+ <widget class="QDialog" name="HelpDialogClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>560</width>
+    <height>460</height>
+   </rect>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background:transparent;</string>
+  </property>
+  <widget class="QWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>5</y>
+     <width>550</width>
+     <height>450</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background:white;</string>
+   </property>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>75</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑 Light</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>帮助</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="closeButton">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>0</y>
+      <width>50</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:transparent;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="mainwindow.qrc">
+      <normaloff>:/MainWindow/close_black.png</normaloff>:/MainWindow/close_black.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>30</width>
+      <height>30</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="textBrowser">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>50</y>
+      <width>550</width>
+      <height>400</height>
+     </rect>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:18px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:14pt; font-weight:600;&quot;&gt;1.软件概述&lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:12pt; font-weight:600;&quot;&gt;1.1 开发目的&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:11pt;&quot;&gt;普通的地图路径规划软件往往有限制——只能从某一特定起点到某一特定终点，这在目标是明确的情况下是适用的。但是有时，我们只是想经过某些类型的点，而没有明确的目标。比如，希望先去看电影，然后吃饭，再去酒吧。这种情况下，我们只是希望得到满足要求的路径，对经过的类型点具体位置是没有要求。因此，我们希望设计出一款可以满足这种需求的软件。同时，得到的路径还需要满足用户所设定的偏好，如用时较短、较少拥堵等。&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:x-large; font-weight:600;&quot;&gt;1.2 基本原理&lt;/span&gt; &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:11pt;&quot;&gt;数据点信息为美国加尼福尼亚州的路网信息。&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:11pt;&quot;&gt;通过建立加权V&lt;/span&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:11pt; color:#333333; background-color:#ffffff;&quot;&gt;oronoi图对路网信息进行处理，对处理后得到的路径进行skyline查询，排除那些被支配的路径从而得到最终的结果。&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:x-large; font-weight:600;&quot;&gt;1.3 主要功能&lt;/span&gt; &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:11pt;&quot;&gt;根据用户输入的类型点序列和偏好，建立并且展示V&lt;/span&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:11pt; color:#333333; background-color:#ffffff;&quot;&gt;oronoi图，提供最终的符合用户需要的较优路径。&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:18px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:xx-large; font-weight:600;&quot;&gt;2.软件使用过程&lt;/span&gt; &lt;/p&gt;
+&lt;p style=&quot; margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:x-large; font-weight:600;&quot;&gt;2.1 使用步骤&lt;/span&gt; &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:11pt;&quot;&gt;界面左侧的菜单栏有“偏好设置”、“Voronoi图”和“查看结果”三个选项。首先点击“偏好设置”选项，在弹出的菜单栏里进行起点、经过类型点以及用户偏好的设置，点击“确定”完成设置。然后点击“Voronoi图”选项，可以查看生成的Voronoi图。最终点击“查看结果”，可以看到&lt;/span&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:11pt; color:#333333; background-color:#ffffff;&quot;&gt;skyline路径结果的图形化展示，点击右侧的路径名称可以查看不同的结果。&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/HelpDialog/help/navigationbar.png&quot; /&gt; &lt;/p&gt;
+&lt;p style=&quot; margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:x-large; font-weight:600;&quot;&gt;2.2 输入&lt;/span&gt; &lt;/p&gt;
+&lt;p style=&quot; margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/HelpDialog/help/inputdialog.png&quot; /&gt; &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:11pt;&quot;&gt;首先通过经纬度定位起点。然后选择用户偏好，可选选项为“性价比高”、“距离短”、“道路畅通”和“时间短”。最后通过⊕号添加需要经过的类型点，如airport。&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:11pt;&quot;&gt;完成所有的输入内容后点击“确定”。&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:x-large; font-weight:600;&quot;&gt;2.3 输出&lt;/span&gt; &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:11pt;&quot;&gt;通过左侧的菜单栏可以查看输出结果。&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:11pt;&quot;&gt;点击“V&lt;/span&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:11pt; color:#333333; background-color:#ffffff;&quot;&gt;oronoi图&lt;/span&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:11pt;&quot;&gt;”选项可以查看生成的&lt;/span&gt;&lt;a name=&quot;OLE_LINK1&quot;&gt;&lt;/a&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:11pt;&quot;&gt;V&lt;/span&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:11pt; color:#333333; background-color:#ffffff;&quot;&gt;oronoi图。&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/HelpDialog/help/voronoi.png&quot; /&gt; &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:11pt; color:#333333; background-color:#ffffff;&quot;&gt;点击“查看结果”选项可以查看skyline路径结果。&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/HelpDialog/help/route.png&quot; /&gt; &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:11pt; color:#333333; background-color:#ffffff;&quot;&gt;地图左上方的“+”和“-”可以对地图进行放大或者缩小。&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:18px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:xx-large; font-weight:600;&quot;&gt;3.软件维护&lt;/span&gt; &lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'微软雅黑 Light,sans-serif'; font-size:11pt;&quot;&gt;软件当前版本号：1.0&lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="mainwindow.qrc"/>
+ </resources>
+ <connections/>
+</ui>

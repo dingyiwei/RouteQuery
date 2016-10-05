@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MapAreaClass</class>
+ <widget class="QWidget" name="MapAreaClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>550</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QGraphicsView" name="graphicsView">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>600</width>
+     <height>550</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGraphicsView{background-color:white;}
+QScrollBar:vertical{width:8px;padding-top:9px;padding-bottom:9px;}
+QGraphicsView QScrollBar::handle:vertical{width:8px;border-radius:4px;}</string>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOn</enum>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
