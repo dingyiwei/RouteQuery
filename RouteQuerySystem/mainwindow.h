@@ -6,6 +6,7 @@
 #include <QGraphicsOpacityEffect>
 #include <QGraphicsScene>
 #include <QGraphicsItem>
+#include <QThread>
 #include <CGAL/Qt/ApolloniusGraphGraphicsItem.h>
 #include "ui_mainwindow.h"
 #include "navigationbar.h"
@@ -17,6 +18,7 @@
 #include "maparea.h"
 #include "zoombuttons.h"
 #include "resultbutton.h"
+#include "loading.h"
 #include "definition.h"
 #include "voronoi.h"
 #include "skyline.h"
@@ -56,6 +58,11 @@ public:
 	//设置Voronoi图序号
 	void setVoronoiIndex();
 
+	void hideLoading();
+
+	signals:
+	void computeVoronoiDone();
+
 private:
 	//鼠标事件，用于拖动窗口
 	void mousePressEvent(QMouseEvent *event);
@@ -70,6 +77,10 @@ private:
 	//设置结果按钮
 	//bool isRoute:是否为路径结果，true时设置路径按钮，false时设置Voronoi按钮
 	void setResultButton(const bool isRoute);
+
+	void computeVoronoi();
+
+	void operateVoronoi();
 
 	Ui::MainWindowClass ui;
 
@@ -115,6 +126,10 @@ private:
 	//帮助对话框
 	HelpDialog *helpDialog;
 
+	Loading *loading;
+
+	QThread thread;
+
 	//导航栏状态
 	bool isNavigationOpen = false;
 
@@ -135,6 +150,9 @@ private:
 
 	//skyline查询
 	Skyline *skyline = nullptr;
+
+	QVector<Route> m_skylineRoutes;
+	QVector<QVector<Node>> m_optimalRoutes;
 };
 
 #endif // MAINWINDOW_H

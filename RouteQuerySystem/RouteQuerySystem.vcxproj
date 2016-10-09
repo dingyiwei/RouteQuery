@@ -164,6 +164,7 @@
     <ClCompile Include="helpbutton.cpp" />
     <ClCompile Include="helpdialog.cpp" />
     <ClCompile Include="inputdialog.cpp" />
+    <ClCompile Include="loading.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
     <ClCompile Include="maparea.cpp" />
@@ -229,6 +230,7 @@
     <ClInclude Include="GeneratedFiles\ui_zoombuttons.h" />
     <ClInclude Include="helpbutton.h" />
     <ClInclude Include="helpdialog.h" />
+    <ClInclude Include="loading.h" />
     <ClInclude Include="maparea.h" />
     <ClInclude Include="resultbutton.h" />
     <ClInclude Include="skyline.h" />

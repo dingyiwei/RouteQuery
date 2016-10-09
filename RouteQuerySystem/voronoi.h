@@ -5,9 +5,10 @@
 #include "definition.h"
 
 #include <QMap>
+#include <QObject>
 
 //Voronoi图
-class Voronoi
+class Voronoi:public QObject
 {
 public:
 	//QMap<int,QVecto<Point>> map:以类型为索引的数据点集
@@ -15,6 +16,8 @@ public:
 	//Point start:起点
 	Voronoi(const QMap<int, QVector<Point>> &map, const CategorySequence &cateSq,
 		const Point &start);
+
+	void operate();
 
 	//获得单个路径的Voronoi图
 	//int index:路径序号

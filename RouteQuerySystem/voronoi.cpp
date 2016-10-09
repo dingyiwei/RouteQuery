@@ -17,6 +17,10 @@ Voronoi::Voronoi(const QMap<int, QVector<Point>> &map, const CategorySequence &c
 	m_cateSq = cateSq;
 	m_start = start;
 	
+}
+
+void Voronoi::operate()
+{
 #pragma omp parallel for
 	for (int i = 0; i < NUM_OF_POINT_ATTRIBUTE; ++i)
 	{

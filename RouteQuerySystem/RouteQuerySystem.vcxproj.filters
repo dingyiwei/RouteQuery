@@ -98,6 +98,9 @@
     <ClCompile Include="helpdialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="loading.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -193,6 +196,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="helpdialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="loading.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -6,8 +6,8 @@
 #include <QPainter>
 #include <QGraphicsLineItem>
 #include <QGraphicsPixmapItem>
-#include <QEventLoop>
-#include <QTimer>
+#include <QMovie>
+#include <QtConcurrent/QtConcurrent>
 
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent)
@@ -125,6 +125,10 @@ MainWindow::MainWindow(QWidget *parent)
 	//初始化帮助对话框
 	helpDialog = new HelpDialog();
 	connect(helpButton, SIGNAL(clicked()), helpDialog, SLOT(exec()));
+
+	loading = new Loading(this);
+	loading->hide();
+	connect(this, SIGNAL(computeVoronoiDone()), this, SLOT(hideLoading()));
 }
 
 MainWindow::~MainWindow()
@@ -173,15 +177,23 @@ void MainWindow::setNavigationBar()
 
 void MainWindow::hideMask()
 {
-// 	QTimer *timer = new QTimer();
-// 	timer->start(1);
-	if (!isNavigationOpen/*&&!timer->isActive()*/)
+	if (!isNavigationOpen)
 	{
 		mask->hide();
 	}
 }
 
 void MainWindow::displayRoute()
+{
+	loading->show();
+	
+
+//	computeVoronoi();
+	QtConcurrent::run(this, &MainWindow::computeVoronoi);
+
+}
+
+void MainWindow::computeVoronoi()
 {
 	if (voronoi != nullptr)
 	{
@@ -251,6 +263,11 @@ void MainWindow::displayRoute()
 
 	//Voronoi图
 	voronoi = new Voronoi(partOfMap, categorySquence, start);
+// 	voronoi->moveToThread(&thread);
+// 	thread.start();
+	voronoi->operate();
+//	operateVoronoi();
+//	QtConcurrent::run(this, &MainWindow::operateVoronoi);
 
 	//skyline查询
 	skyline = new Skyline(voronoi->getRoutes(), preference);
@@ -258,9 +275,9 @@ void MainWindow::displayRoute()
 	//获得最优路径
 	QVector<QVector<int>> routesIndexes;
 	int pointsCount = 0;
-	QVector<Route> skylineRoutes = skyline->getSkylineRoutes();
+	m_skylineRoutes = skyline->getSkylineRoutes();
 	//将路径中的数据点加入选中结点集，其临边加入选中边集
-	for each(Route route in skylineRoutes)
+	for each(Route route in m_skylineRoutes)
 	{
 		routesIndexes.push_back(QVector<int>());
 		for each(Point p in route.points)
@@ -281,16 +298,15 @@ void MainWindow::displayRoute()
 
 	//Dijkstra
 	Dijkstra *dijkstra = new Dijkstra(simpleEdges, selectedNodes, routesIndexes);
-	QVector<QVector<Node>> optimalRoutes = dijkstra->getOptimalRoutes();
+	m_optimalRoutes = dijkstra->getOptimalRoutes();
 
-	//设置Voronoi图
-	mapArea->setVoronoi(voronoi->getVoronois());
+	emit computeVoronoiDone();
 
-	//设置路径
-	mapArea->setRoute(optimalRoutes, skylineRoutes);
+}
 
-	//设置路径结果按钮
-	setResultButton(true);
+void MainWindow::operateVoronoi()
+{
+	voronoi->operate();
 }
 
 void MainWindow::drawVoronoiGraph()
@@ -381,4 +397,20 @@ void MainWindow::setVoronoiIndex()
 	int routeIndex = index / mapArea->getVoronoiSize();
 	int voronoiIndex = index%mapArea->getVoronoiSize();
 	mapArea->setVoronoi(routeIndex, voronoiIndex);
+}
+
+void MainWindow::hideLoading()
+{
+
+	//设置Voronoi图
+	mapArea->setVoronoi(voronoi->getVoronois());
+
+	//设置路径
+	mapArea->setRoute(m_optimalRoutes, m_skylineRoutes);
+	//设置路径结果按钮
+	setResultButton(true);
+
+	loading->hide();
+
+	openNavigation();
 }
