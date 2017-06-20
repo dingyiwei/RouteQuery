@@ -14,10 +14,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
 	ui.setupUi(this);
 
-	//ÉèÖÃ´°¿ÚÎŞ±ß¿ò
+	//è®¾ç½®çª—å£æ— è¾¹æ¡†
 	setWindowFlags(Qt::FramelessWindowHint);
 
-	//¶ÁÈ¡µØÍ¼Êı¾İ
+	//è¯»å–åœ°å›¾æ•°æ®
 	DataProcessor *dp = new DataProcessor();
 	nodes = dp->getNodes();
 	points = dp->getPoints();
@@ -25,104 +25,104 @@ MainWindow::MainWindow(QWidget *parent)
 	regions = dp->getRegions();
 	delete dp;
 
-	//³õÊ¼»¯Õ¹Ê¾Çø
+	//åˆå§‹åŒ–å±•ç¤ºåŒº
 	mapArea = new MapArea(&nodes, &points, &caMap, this);
 	mapArea->move(0, 50);
 
-	//ÉèÖÃÕ¹Ê¾ÇøÒõÓ°
+	//è®¾ç½®å±•ç¤ºåŒºé˜´å½±
 	QGraphicsDropShadowEffect *graphicEffect = new QGraphicsDropShadowEffect(this);
 	graphicEffect->setOffset(0, 0);
 	graphicEffect->setColor(QColor("#bbbbbb"));
 	graphicEffect->setBlurRadius(10);
 	mapArea->setGraphicsEffect(graphicEffect);
 
-	//³õÊ¼»¯Ëõ·Å°´Å¥×é
+	//åˆå§‹åŒ–ç¼©æ”¾æŒ‰é’®ç»„
 	zoomButtons = new ZoomButtons(this);
 	zoomButtons->move(20, 70);
 
-	//ÉèÖÃËõ·Å°´Å¥×éÒõÓ°
+	//è®¾ç½®ç¼©æ”¾æŒ‰é’®ç»„é˜´å½±
 	QGraphicsDropShadowEffect *zoomButtonsEffect = new QGraphicsDropShadowEffect(this);
 	zoomButtonsEffect->setOffset(0, 0);
 	zoomButtonsEffect->setColor(QColor("#bbbbbb"));
 	zoomButtonsEffect->setBlurRadius(10);
 	zoomButtons->setGraphicsEffect(zoomButtonsEffect);
 
-	//³õÊ¼»¯ÕÚÕÖ
+	//åˆå§‹åŒ–é®ç½©
 	mask = new QWidget(this);
 	mask->setStyleSheet("background-color:black");
 	mask->resize(this->size());
 
-	//³õÊ¼»¯µ¼º½À¸
+	//åˆå§‹åŒ–å¯¼èˆªæ 
 	navigationBar = new NavigationBar(this);
 	navigationBar->move(-270, 0);
 	navigationBar->show();
 
-	//³õÊ¼»¯²Ëµ¥°´Å¥
+	//åˆå§‹åŒ–èœå•æŒ‰é’®
 	menuButton = new MenuButton(this);
 
-	//³õÊ¼»¯¹Ø±Õ°´Å¥
+	//åˆå§‹åŒ–å…³é—­æŒ‰é’®
 	closeButton = new CloseButton(this);
 	closeButton->move(750, 0);
-	//¹Ø±Õ´°¿Ú
+	//å…³é—­çª—å£
 	connect(closeButton, SIGNAL(clicked()), this, SLOT(close()));
 
-	//³õÊ¼»¯°ïÖú°´Å¥
+	//åˆå§‹åŒ–å¸®åŠ©æŒ‰é’®
 	helpButton = new HelpButton(this);
 	helpButton->move(700, 0);
 
-	//ÉèÖÃ±êÌâÀ¸ÒõÓ°
+	//è®¾ç½®æ ‡é¢˜æ é˜´å½±
 	QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(this);
 	effect->setOffset(0, 2);
 	effect->setColor(Qt::gray);
 	effect->setBlurRadius(10);
 	ui.menubar->setGraphicsEffect(effect);
 
-	//ÉèÖÃµ¼º½À¸ÒõÓ°
+	//è®¾ç½®å¯¼èˆªæ é˜´å½±
 	QGraphicsDropShadowEffect *navigationBarEffect = new QGraphicsDropShadowEffect(this);
 	navigationBarEffect->setOffset(2, 0);
 	navigationBarEffect->setColor(QColor("#444444"));
 	navigationBarEffect->setBlurRadius(10);
 	navigationBar->setGraphicsEffect(navigationBarEffect);
 
-	//ÉèÖÃÕÚÕÖÍ¸Ã÷¶È
+	//è®¾ç½®é®ç½©é€æ˜åº¦
 	maskEffect = new QGraphicsOpacityEffect(this);
 	maskEffect->setOpacity(0);
  	mask->setGraphicsEffect(maskEffect);
 	mask->hide();
 
-	//ÉèÖÃµ¼º½À¸¶¯»­
+	//è®¾ç½®å¯¼èˆªæ åŠ¨ç”»
 	timeLine = new QTimeLine(500, this);
 	timeLine->setFrameRange(-270, 0);
 	timeLine->setCurveShape(QTimeLine::EaseInOutCurve);
-	//µ¼º½À¸µ¯³ö
+	//å¯¼èˆªæ å¼¹å‡º
 	connect(timeLine, SIGNAL(frameChanged(int)), this, 
 		SLOT(moveNavigationBar(int)));
 	connect(menuButton, SIGNAL(clicked()), this, SLOT(openNavigation()));
 
-	//³õÊ¼»¯ÊäÈë¶Ô»°¿ò
+	//åˆå§‹åŒ–è¾“å…¥å¯¹è¯æ¡†
 	inputDialog = new InputDialog(&nodes);
-	//Æ«ºÃÉèÖÃ
+	//åå¥½è®¾ç½®
 	connect(navigationBar->getPreferenceSettingButton(), SIGNAL(clicked()),
 		inputDialog, SLOT(exec()));
-	//È·ÈÏÊäÈë
+	//ç¡®è®¤è¾“å…¥
 	connect(inputDialog->getConfirmButton(), SIGNAL(clicked()), this, 
 		SLOT(displayRoute()));
 
-	//VoronoiÍ¼
+	//Voronoiå›¾
 	connect(navigationBar->getVoronoiButton(), SIGNAL(clicked()), this,
 		SLOT(drawVoronoiGraph()));
-	//²é¿´½á¹û
+	//æŸ¥çœ‹ç»“æœ
 	connect(navigationBar->getResultButton(), SIGNAL(clicked()), this,
 		SLOT(displayRoute()));
 
-	//·Å´ó
+	//æ”¾å¤§
 	connect(zoomButtons->getZoomInButton(), SIGNAL(clicked()), this,
 		SLOT(mapZoomIn()));
-	//ËõĞ¡
+	//ç¼©å°
 	connect(zoomButtons->getZoomOutButton(), SIGNAL(clicked()), this,
 		SLOT(mapZoomOut()));
 
-	//³õÊ¼»¯°ïÖú¶Ô»°¿ò
+	//åˆå§‹åŒ–å¸®åŠ©å¯¹è¯æ¡†
 	helpDialog = new HelpDialog();
 	connect(helpButton, SIGNAL(clicked()), helpDialog, SLOT(exec()));
 
@@ -206,27 +206,27 @@ void MainWindow::computeVoronoi()
 		skyline = nullptr;
 	}
 
-	//»ñµÃÆğµã
+	//è·å¾—èµ·ç‚¹
 	Point start;
 	start.x = inputDialog->getStartX();
 	start.y = inputDialog->getStartY();
 	start.category = -1;
 	int startNodeIndex = inputDialog->getStartNodeIndex();
 
-	//»ñµÃÆ«ºÃ
+	//è·å¾—åå¥½
 	int preference = inputDialog->getPreference();
 
-	//»ñµÃÆğµãËùÔÚÇøÓò
+	//è·å¾—èµ·ç‚¹æ‰€åœ¨åŒºåŸŸ
 	double rowDistance = (TOP - BOTTOM) / ROW;
 	double colDistance = (RIGHT - LEFT) / COL;
 	int rowRegion = (int)((start.x - LEFT) / colDistance);
 	int colRegion = (int)((TOP - start.y) / rowDistance);
 	start.regionIndex = rowRegion*ROW + colRegion;
 
-	//»ñµÃÀàĞÍĞòÁĞ
+	//è·å¾—ç±»å‹åºåˆ—
 	QVector<int> categorySquence = inputDialog->getCategorySequence();
 
-	//»ñµÃÇøÓòÄÚÊı¾İµã
+	//è·å¾—åŒºåŸŸå†…æ•°æ®ç‚¹
 	QMap<int, QVector<Point>> partOfMap;
 	for each(int category in categorySquence)
 	{
@@ -243,7 +243,7 @@ void MainWindow::computeVoronoi()
 		}
 	}
 
-	//»ñµÃÇøÓòÄÚ±ß¡¢½áµã
+	//è·å¾—åŒºåŸŸå†…è¾¹ã€ç»“ç‚¹
 	QVector<SimpleEdge> simpleEdges;
 	QMap<int, Node> selectedNodes;
 	for (int i = 0; i < caMap.size(); ++i)
@@ -261,7 +261,7 @@ void MainWindow::computeVoronoi()
 		}
 	}
 
-	//VoronoiÍ¼
+	//Voronoiå›¾
 	voronoi = new Voronoi(partOfMap, categorySquence, start);
 // 	voronoi->moveToThread(&thread);
 // 	thread.start();
@@ -269,14 +269,14 @@ void MainWindow::computeVoronoi()
 //	operateVoronoi();
 //	QtConcurrent::run(this, &MainWindow::operateVoronoi);
 
-	//skyline²éÑ¯
+	//skylineæŸ¥è¯¢
 	skyline = new Skyline(voronoi->getRoutes(), preference);
 
-	//»ñµÃ×îÓÅÂ·¾¶
+	//è·å¾—æœ€ä¼˜è·¯å¾„
 	QVector<QVector<int>> routesIndexes;
 	int pointsCount = 0;
 	m_skylineRoutes = skyline->getSkylineRoutes();
-	//½«Â·¾¶ÖĞµÄÊı¾İµã¼ÓÈëÑ¡ÖĞ½áµã¼¯£¬ÆäÁÙ±ß¼ÓÈëÑ¡ÖĞ±ß¼¯
+	//å°†è·¯å¾„ä¸­çš„æ•°æ®ç‚¹åŠ å…¥é€‰ä¸­ç»“ç‚¹é›†ï¼Œå…¶ä¸´è¾¹åŠ å…¥é€‰ä¸­è¾¹é›†
 	for each(Route route in m_skylineRoutes)
 	{
 		routesIndexes.push_back(QVector<int>());
@@ -311,10 +311,10 @@ void MainWindow::operateVoronoi()
 
 void MainWindow::drawVoronoiGraph()
 {
-	//ÏÔÊ¾VoronoiÍ¼
+	//æ˜¾ç¤ºVoronoiå›¾
 	mapArea->setVoronoi(0, 0);
 
-	//ÉèÖÃVoronoiÍ¼½á¹û°´Å¥
+	//è®¾ç½®Voronoiå›¾ç»“æœæŒ‰é’®
 	setResultButton(false);
 }
 
@@ -330,7 +330,7 @@ void MainWindow::mapZoomOut()
 
 void MainWindow::setResultButton(const bool isRoute)
 {
-	//Çå¿Õ½á¹û°´Å¥
+	//æ¸…ç©ºç»“æœæŒ‰é’®
 	for each(ResultButton *button in resultButtons)
 	{
 		if (button != nullptr)
@@ -341,12 +341,12 @@ void MainWindow::setResultButton(const bool isRoute)
 	}
 	resultButtons.clear();
 
-	//ÖØĞÂÉú³É°´Å¥
+	//é‡æ–°ç”ŸæˆæŒ‰é’®
 	QString buttonText;
 	int size;
 	if (isRoute)
 	{
-		buttonText = QString::fromLocal8Bit("Â·¾¶");
+		buttonText = QString::fromLocal8Bit("route");
 		size = mapArea->getRouteSize();
 	}
 	else
@@ -356,12 +356,12 @@ void MainWindow::setResultButton(const bool isRoute)
 	}
 	for (int i = 0; i < size; ++i)
 	{
-		//³õÊ¼»¯°´Å¥
+		//åˆå§‹åŒ–æŒ‰é’®
 		ResultButton *button = new ResultButton(i,
 			buttonText + QString::number(i + 1),
 			ui.scrollAreaWidgetContents);
 
-		//ÉèÖÃ°´Å¥ÒõÓ°
+		//è®¾ç½®æŒ‰é’®é˜´å½±
 		QGraphicsDropShadowEffect *buttonEffect = 
 			new QGraphicsDropShadowEffect(ui.scrollAreaWidgetContents);
 		buttonEffect->setColor(QColor("#cccccc"));
@@ -371,12 +371,12 @@ void MainWindow::setResultButton(const bool isRoute)
 
 		if (isRoute)
 		{
-			//ÏÔÊ¾Â·¾¶
+			//æ˜¾ç¤ºè·¯å¾„
 			connect(button->getButton(), SIGNAL(clicked()), this, SLOT(setRouteIndex()));
 		}
 		else
 		{
-			//ÏÔÊ¾VoronoiÍ¼
+			//æ˜¾ç¤ºVoronoiå›¾
 			connect(button->getButton(), SIGNAL(clicked()), this, SLOT(setVoronoiIndex()));
 		}
 		button->show();
@@ -402,12 +402,12 @@ void MainWindow::setVoronoiIndex()
 void MainWindow::hideLoading()
 {
 
-	//ÉèÖÃVoronoiÍ¼
+	//è®¾ç½®Voronoiå›¾
 	mapArea->setVoronoi(voronoi->getVoronois());
 
-	//ÉèÖÃÂ·¾¶
+	//è®¾ç½®è·¯å¾„
 	mapArea->setRoute(m_optimalRoutes, m_skylineRoutes);
-	//ÉèÖÃÂ·¾¶½á¹û°´Å¥
+	//è®¾ç½®è·¯å¾„ç»“æœæŒ‰é’®
 	setResultButton(true);
 
 	loading->hide();
